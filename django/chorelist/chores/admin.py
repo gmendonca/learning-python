@@ -4,4 +4,12 @@ from django.contrib import admin
 
 from .models import ChoreList
 
-admin.site.register(ChoreList)
+class ChoreListAdmin(admin.ModelAdmin):
+    # fields = ['due_date', 'name']
+    fieldsets = [
+        (None, {'fields': ['name']}),
+        ('Date Info', {'fields': ['due_date'], 'classes': ['collapse']})
+    ]
+
+
+admin.site.register(ChoreList, ChoreListAdmin)
