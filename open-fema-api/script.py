@@ -19,4 +19,21 @@ request_s += "&$top=5000"
 
 """print(request_s)"""
 
-print urllib2.urlopen(request_s).read()
+result = urllib2.urlopen(request_s).read()
+req_dict = eval(result)
+disaster_list = eval(str(req_dict[req_dict.keys()[0]]))
+
+csvfile = open("fematest.csv", "w")
+
+for item in dict(disaster_list[0]):
+    csvfile.write(item + ",")
+
+csvfile.write("\n")
+
+for disaster in disaster_list:
+    disaster_dict = dict(disaster)
+    for key in disaster_dict:
+        csvfile.write(str(disaster_dict[key]) + ",")
+    csvfile.write("\n")
+
+csvfile.close()
